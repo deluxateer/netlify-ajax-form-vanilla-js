@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Test Form</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <style> html {font-size: 20px;} </style>
+  </head>
+  <body>
+    <div id="contact">
+      <div class="container">
+        <h3>Reach Out to Me!</h3>
+        <form name="contact" method="POST" action="/#contact" data-netlify="true">
+          <p>
+            <label>Your Name: <input type="text" name="name"/></label>
+          </p>
+          <p>
+            <label>Your Email: <input type="email" name="email"/></label>
+          </p>
+            <label>Message: <textarea name="message"></textarea></label>
+          </p>
+          <p><button type="submit">Send</button></p>
+        </form>
+      </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+
+      // jQuery Version
+      // $("#my-form").submit(function(e) {
+      //   e.preventDefault();
+
+      //   var $form = $(this);
+      //   $.post($form.attr("action"), $form.serialize()).then(function() {
+      //     alert("Thank you!");
+      //   });
+      // });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      let testForm = document.querySelector("#contact form");
+      
+      testForm.addEventListener('submit', e => {
+        e.preventDefault();
+
+        const formData = new FormData(testForm);
+        fetch(testForm.getAttribute('action'), {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/x-www-form-urlencoded;charset=UTF-8',
+            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+          },
+          body: new URLSearchParams(formData).toString()
+        })
+        .then(res => {
+          if (res) {
+            M.toast({
+              html: 'Thank you for your submission!',
+              classes: 'pulse'
+            });
+          }
+        });
+      });
+    
+    </script>
+  </body>
+</html>
